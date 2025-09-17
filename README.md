@@ -110,6 +110,7 @@ For a long time I was a giant fan of the Gemma3 (and 3n) model family. This chan
 
 When we look at the chart we can quickly observe one thing: Qwen3 4B 2507 excels at the overall score, only falling behind at "language (and medicine)" and Math (look at section: Important).
 ![Language And Medicine](images/image_20250917133323.png)
+
 ![Math](images/image_20250917133352.png)
 
 While those results can be fake in real-world performance, I think it is very interesting to see that a 4B model can outperform a 12B model.
@@ -130,6 +131,7 @@ When it came time to write this part, I verified scores of my favorite contender
 ![Math scores comparation](images/image_20250917134321.png)
 
 As I specified earlier, I wanted to test if models follow instructions as simple as "Zwróć tylko liczbę" (Pol. "Return only the number"). Qwen failed it. It "reasoned" its way through the problem. My regex looked at the answer and said: "Hmm, there isn’t an answer here, it’s just something that is wrong." It wasn’t wrong, it calculated the answer correctly, just at the end of its answer.
+
 ![Qwen3 4B 2507 response](images/image_20250917134454.png)
 
 My regex was simple, in math problems it assumed that model may say something like: "Answer it 10" or just "10.". I was ready for it to obey my instruction just a bit, not write entire 7 + 3 = 10, my regex wasn't ready for it.
