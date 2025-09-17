@@ -21,7 +21,7 @@
 
 ---
 
-# [TymBench comparison website](https://tymetm.github.io/TymBench/)
+# [TymBench comparison website](https://tymektm.github.io/TymBench/)
 
 
 ## What is TymBench
@@ -90,7 +90,7 @@ TymBench is intended for small language models, and big SOTA models will probabl
 
 Before I state my findings, I want to imply that everything written below is my subjective opinion. If you wish to see raw data, use the provided GitHub page with up-to-date interactive diagrams.
 
-[Link to the page](https://tymetm.github.io/TymBench/)
+[Link to the page](https://tymektm.github.io/TymBench/)
 
 Entire report is written by me (Human) by hand and revised by GPT-5 by OpenAI.
 
@@ -106,31 +106,31 @@ When we look at the chart we can quickly observe that the biggest models (gpt-os
 
 For a long time I was a giant fan of the Gemma3 (and 3n) model family. This changed when I downloaded Qwen3 4B 2507. This model seemed brilliant, and it was also the reason I decided to create TymBench, a way to measure model performance and quality by other means than "vibe."
 
-![Qwen3 2507 and Gemma3 comparation](image_20250917133253.png)
+![Qwen3 2507 and Gemma3 comparation](images/image_20250917133253.png)
 
 When we look at the chart we can quickly observe one thing: Qwen3 4B 2507 excels at the overall score, only falling behind at "language (and medicine)" and Math (look at section: Important).
-![Language And Medicine](image_20250917133323.png)
-![Math](image_20250917133352.png)
+![Language And Medicine](images/image_20250917133323.png)
+![Math](images/image_20250917133352.png)
 
 While those results can be fake in real-world performance, I think it is very interesting to see that a 4B model can outperform a 12B model.
 
 #### But what about thinking?
 
 When we give Qwen3 access to thinking, it will think - for a very, very, VERY long time.
-![Model comparasion with Thinking variant](image_20250917133927.png)
+![Model comparasion with Thinking variant](images/image_20250917133927.png)
 
 Because I was running all of these models on my personal PC, I gave them all a context length of 16k tokens (16384 to be exact). Qwen3 4B Thinking 2507 used them all multiple times. It is possible that the score of it could be much higher (for example, in coding where it falls behind its non-thinking counterpart), but I had to give all models equal chances.
-![Coding comparation]( image_20250917133833.png)
+![Coding comparation](images/image_20250917133833.png)
 
 Qwen3 4B Thinking 2507 is, in my opinion, one giant over-thinker. In daily use, I would (and will!) use just the normal Qwen3 4B 2507. When reasoning is needed, I will probably settle for the (bigger and more token-efficient) gpt-oss 20B.
 
 ## Gemma3: The math kings?
 
 When it came time to write this part, I verified scores of my favorite contenders Qwen3 4B 2507 and Gemma3 4B. Those are the same class of models, so naturally I wanted to see why Qwen was so far ahead in everything and falling behind in math. Well, to say the least, it hasn’t failed.
-![Math scores comparation](image_20250917134321.png)
+![Math scores comparation](images/image_20250917134321.png)
 
 As I specified earlier, I wanted to test if models follow instructions as simple as "Zwróć tylko liczbę" (Pol. "Return only the number"). Qwen failed it. It "reasoned" its way through the problem. My regex looked at the answer and said: "Hmm, there isn’t an answer here, it’s just something that is wrong." It wasn’t wrong, it calculated the answer correctly, just at the end of its answer.
-![Qwen3 4B 2507 response](image_20250917134454.png)
+![Qwen3 4B 2507 response](images/image_20250917134454.png)
 
 My regex was simple, in math problems it assumed that model may say something like: "Answer it 10" or just "10.". I was ready for it to obey my instruction just a bit, not write entire 7 + 3 = 10, my regex wasn't ready for it.
 
@@ -146,30 +146,30 @@ LLaMA 3.2 was what originally got me into local language models. Before, I thoug
 
 But even after this heartbreaking story, I have to say, LLaMA 3 is an old architecture. When we look at the statistics - 22 and 39 percent score for LLaMA 3.2 1B and 3B respectively - we can notice it isn’t great. Comparing to Gemma3 1B at 35%, it is easy to say it’s not worth it to use small LLaMAs anymore.
 
-![Performance of small models including LlaMA](image_20250917134658.png)
+![Performance of small models including LlaMA](images/image_20250917134658.png)
 
 # Bigger is better?
 
 
 According to a definition I saw in an NVIDIA course, a Large Language Model is any model with more than 10B parameters. In my original testing set there are 7 LLMs. The best performing are of course GPT-OSS 20B and Qwen3 30B A3B 2507 - the largest models I have run up to this point. Until recently, I preferred the 4 - 7B range as the ideal size to run locally, since they fit comfortably into my GPU VRAM. That changed with the release of GPT-OSS.
 
-![Results of Large Language Models Category](image_20250917135023.png)
+![Results of Large Language Models Category](images/image_20250917135023.png)
 
 At the top we find GPT-OSS 20B and Qwen3 30B A3B 2507 with equal scores. The former is stronger in “Language (and medicine)” and Polish literature, while the latter performs better in math (correct one-shot answers) and coding. I plan to test both in daily use in the future, but at this point they seem roughly equal. Qwen, however, is noticeably faster, which may be a decisive advantage.
 
 The biggest disappointment in this category was Ernie 4.5 21B A3B. At this size, I expected it to perform only slightly worse than Qwen3 30B A3B 2507, but to my surprise it did even worse than Gemma 4B, a model roughly 81% smaller. Since it was hyped on X (Twitter), I included it in my benchmark, but based on these results I wouldn’t recommend it.
 
-![Ernie 4.5 21B is comparable with smaller models](image_20250917135229.png)
+![Ernie 4.5 21B is comparable with smaller models](images/image_20250917135229.png)
 
 That was my conclusion until yesterday. I was actually writing this report while waiting for the final benchmark to finish, not expecting anything unusual. But when the results came in, I was stunned - it completely broke my assumptions. Honestly, it was a bit of a letdown moment. Phi-4-Reasoning-Plus, a 15B parameter model, was last on my list. I decided to start writing this report while it was running in the background. What can I say, after **six hours**, it scored 24%, on par with Gemma3… but the 270M parameter one. A model that is 98% smaller performed comparably in my benchmark.
 
-![Bad Phi 4 Reasoning Plus performance](image_20250917135346.png)
+![Bad Phi 4 Reasoning Plus performance](images/image_20250917135346.png)
 
 Of course, I couldn’t just let something like this slip by, so I went and double-checked. Phi was the only model that repeatedly returned empty responses, and in other places it was simply wrong. That was the biggest shock for me. I had heard that Phi models weren’t great - but I wasn’t expecting _this_ bad. 
 
 Mistral Nemo 2407 (12B) was added as a way to test Mistral’s models, but only after running all tests did I realize it had been released over 430 days earlier. That said, its performance still deserves a note: it ended up on par with LLaMA 3.2 3B, scoring 41% and 39% respectively.
 
-![Mistral Nemo score](image_20250917135520.png)
+![Mistral Nemo score](images/image_20250917135520.png)
 # Takeaways
 Creating the first version of TymBench was a very fun and educational journey. It showed me things that I couldn’t test in normal conversations with the models and gave me the ability to experiment with many of them quickly.
 
